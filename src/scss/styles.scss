@@ -1,30 +1,50 @@
 * {
 box-sizing: border-box;
 }
-
 body {
 font-size: 16px;
 overflow: hidden;
 margin: 0;
 padding: 0;
-border: rgb(16, 165, 16) solid 8px;
 width: 100vw;
 height: 100vh;
 }
 main {
-  height: 98vh;
-  width: 98vw;
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+height: 100vh;
+width: 100vw;
 }
-.hand {
-margin: 0 auto;
-padding: 0;
+button {
+height: 60px;
+background: green;
+color: white;
+border-radius:  15px;
+font-size: 20px;
+border: none;
+box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.438);
+position: absolute;
+left: 0px;
+z-index: 1;
+}
+.display_none {
+display: none;
+}
+
+// Joueur 1
+.hand1 {
 display: flex;
 justify-content: center;
 align-items: center;
 list-style-type: none;
-transform: translateY(120%);
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translate(-50%,-50%);
   img {
-  height: 180px;
+  height: 120px;
   margin-right: 5px;
   }
   li {
@@ -35,46 +55,94 @@ transform: translateY(120%);
   transform: scale(1.2);
   }
 }
-header {
-  position: relative;
-}
-button {
-height: 60px;
-background: green;
-color: white;
-border-radius:  15px;
-font-size: 20px;
-border: none;
-box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.438);
-transform: translateX(330%);
-position: absolute;
-top: 20px;
-}
-
-.display_none {
-display: none;
-}
-.tray {
-margin: 0 auto;
-padding: 0;
+.tray1 {
 display: flex;
 justify-content: center;
 align-items: center;
 list-style-type: none;
-transform: translateY(50%);
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translate(-50%,-50%);
 figure {
   border: 1px solid rgb(16, 165, 16) ;
-  height: 240px;
-  width: 170px;
+  height: 120px;
+  width: 90px;
   margin-right: 20px;
   text-align: center ;
+ }
+ img {
+  height: 120px;
  }
  figcaption {
   margin-bottom: 10px;
  }
 }
-.animation {
+.player1 {
+  height: 50vh;
+  width: 100vw;
+  position: relative;
+}
+
+
+
+
+
+
+// Joueur 2
+.tray2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  figure {
+    border: 1px solid rgb(16, 165, 16) ;
+    height: 120px;
+    width: 85px;
+    margin-right: 20px;
+    text-align: center ;
+   }
+   img {
+     height: 120px;
+   }
+   figcaption {
+    margin-bottom: 10px;
+   }
+}
+.hand2 {
+display: flex;
+justify-content: center;
+align-items: center;
+list-style-type: none;
+  img {
+  height: 120px;
+  margin-right: 5px;
+  }
+  li {
+  transition: all 0.3s;
+  }
+  img:hover {
+  transition: all  0.2s ;
+  transform: scale(1.2);
+  }
+}
+.player2 {
+  height: 50vh;
+  width: 100vw;
+  position: relative;
+}
+
+.animation__hand2 {
   transition: 1s ease-in-out;
-  transform: translateY(460px);
+  transform: translateY(200%);
+}
+.animation__hand1 {
+  transition: 1s ease-in-out;
+  transform: translateY(-200%);
+  
 }
 
