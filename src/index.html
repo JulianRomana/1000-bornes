@@ -1,71 +1,75 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>1000 Bornes</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../src/scss/reset.scss">
-    <link rel="stylesheet" type="text/css" media="screen" href="../src/scss/styles.scss">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../src/scss/styles.scss" />
     <script defer src="../src/js/main.js"></script>
-</head>
-<body>
-  <header>
-	</header>
-	<main>
-		<section class="player1">
-			<ul class="hand1" id="hand1">
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-			</ul>
-			<div class="display_none" id="tray1">
-					<figure>
-							<figcaption>attack</figcaption>
-					</figure>
-					<figure>
-							<figcaption>defense</figcaption>
-					</figure>
-					<figure>
-							<figcaption>bonus</figcaption>
-					</figure>
-					<figure>
-							<figcaption>speed</figcaption>
-					</figure>
-			</div>
-		</section>
-		<button>Prenez vos cartes !</button>
-		<section class="player2">
-			<div class="display_none" id="tray2">
-					<figure>
-							<figcaption>attack</figcaption>
-					</figure>
-					<figure>
-							<figcaption>defense</figcaption>
-					</figure>
-					<figure>
-							<figcaption>bonus</figcaption>
-					</figure>
-					<figure>
-							<figcaption>speed</figcaption>
-					</figure>
-			</div>
-			<ul class="hand2" id="hand2">
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-					<li><img src="../src/assets/default.png" alt=" default card"></li>
-			</ul>
-		</section>
-	</main>
-</body>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <section class="player1">
+        <div class="display_none" id="tray1">
+          <figure>
+            <figcaption>attack</figcaption>
+          </figure>
+          <figure>
+            <figcaption>defense</figcaption>
+          </figure>
+          <figure>
+            <figcaption>bonus</figcaption>
+          </figure>
+          <figure>
+            <figcaption>speed</figcaption>
+          </figure>
+        </div>
+        <ul class="hand1" id="hand1">
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+        </ul>
+        <span>Votre vitesse: </span>
+      </section>
+      <button id="shuffleButton" class="shuffleButton">Prenez vos cartes !</button>
+      <div class="deck">
+        <img class="deck__cards" src="/assets/default.png" alt="defaultcard" />
+        <button id="deck__button" class="deck__button" disabled="true">Tire une carte !</button>
+      </div>
+      <section class="player2">
+        <div class="display_none" id="tray2">
+          <figure>
+            <figcaption>attack</figcaption>
+          </figure>
+          <figure>
+            <figcaption>defense</figcaption>
+          </figure>
+          <figure>
+            <figcaption>bonus</figcaption>
+          </figure>
+          <figure>
+            <figcaption>speed</figcaption>
+          </figure>
+        </div>
+        <ul class="hand2" id="hand2">
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+          <li><img src="../src/assets/default.png" alt=" default card" /></li>
+        </ul>
+        <span>Votre vitesse: </span>
+      </section>
+    </main>
+  </body>
 </html>
