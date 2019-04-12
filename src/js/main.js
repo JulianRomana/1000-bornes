@@ -1,33 +1,13 @@
-import { runMain } from "module";
-import { notStrictEqual } from "assert";
 let images = require("../assets/*.png");
+
 // Different variables
-
-// Player 1 variables
-let hand1 = document.querySelector("#hand1");
-let tray1 = document.querySelector("#tray1");
-let handCards1 = document.querySelectorAll("#hand1 li");
-let trayAttack1 = document.querySelectorAll("#tray1 figure")[0];
-let trayDefense1 = document.querySelectorAll("#tray1 figure")[1];
-let trayBonus1 = document.querySelectorAll("#tray1 figure")[2];
-let traySpeed1 = document.querySelectorAll("#tray1 figure")[3];
-
-// Player 2 variables
-let hand2 = document.querySelector("#hand2 ");
-let tray2 = document.querySelector("#tray2");
-let handCards2 = document.querySelectorAll("#hand2 li");
-let trayAttack2 = document.querySelectorAll("#tray2 figure")[0];
-let trayDefense2 = document.querySelectorAll("#tray2 figure")[1];
-let trayBonus2 = document.querySelectorAll("#tray2 figure")[2];
-let traySpeed2 = document.querySelectorAll("#tray2 figure")[3];
-
 let speed1 = document.querySelectorAll("span")[0];
 let speed2 = document.querySelectorAll("span")[1];
 
 let shuffleButton = document.querySelector("#shuffleButton");
 let drawCardButton = document.querySelector("#deck__button");
-let countingRemoves = false;
-let handLength = 8;
+let countingAdded = 1;
+let play = true;
 // object to create the cards
 class Card {
   constructor(name, image, occurrence) {
@@ -85,25 +65,107 @@ cards = cards.reduce((memo, item) => {
   }
   return memo;
 }, []);
-
 // Object who represents the player 1
 let player1 = {
-  hand1: [],
+  handArray: [],
   speed: 0,
+  tray: document.querySelector("#tray1"),
+  hand: document.querySelector("#hand1"),
+  handCard: document.querySelectorAll("#hand1 li"),
+  trayAttack: document.querySelectorAll("#tray1 figure")[0],
+  trayDefense: document.querySelectorAll("#tray1 figure")[1],
+  trayBonus: document.querySelectorAll("#tray1 figure")[2],
+  traySpeed: document.querySelectorAll("#tray1 figure")[3],
   shuffleHand() {
-    for (let i = 0; i < handCards1.length; i++) {
-      randomCards(this.hand1, handCards1[i]);
+    for (let i = 0; i < this.handCard.length; i++) {
+      randomCards(this.handArray, this.handCard[i]);
     }
   }
 };
 
 // Object who represents the player 2
 let player2 = {
-  hand2: [],
+  handArray: [],
   speed: 0,
+  tray: document.querySelector("#tray2"),
+  hand: document.querySelector("#hand2"),
+  handCard: document.querySelectorAll("#hand2 li"),
+  trayAttack: document.querySelectorAll("#tray2 figure")[0],
+  trayDefense: document.querySelectorAll("#tray2 figure")[1],
+  trayBonus: document.querySelectorAll("#tray2 figure")[2],
+  traySpeed: document.querySelectorAll("#tray2 figure")[3],
   shuffleHand() {
-    for (let i = 0; i < handCards2.length; i++) {
-      randomCards(this.hand2, handCards2[i]);
+    for (let i = 0; i < this.handCard.length; i++) {
+      randomCards(this.handArray, this.handCard[i]);
+    }
+  },
+  drawCard() {
+    let randomNumber = Math.floor(Math.random() * cards.length);
+    let randomCard = cards[randomNumber];
+    let newLi = document.createElement("li");
+    let newCard = document.createElement("img");
+    newCard.setAttribute("src", randomCard.image);
+    newCard.setAttribute("alt", randomCard.name);
+    newLi.appendChild(newCard);
+    this.handArray.push(randomCard);
+    this.hand.appendChild(newLi);
+    cards.splice(randomNumber, 1);
+    newLi.addEventListener("click", () => {
+      if (play) {
+        let innerImage = newLi.querySelector("img");
+        let attribute = innerImage.getAttribute("alt");
+        if (attribute === "50" || attribute === "25" || attribute === "75" || attribute === "100" || attribute === "200") {
+          if (this.traySpeed.children[1]) {
+            this.traySpeed.children[1].remove();
+          }
+          this.traySpeed.append(innerImage);
+          this.speed = this.speed + parseInt(attribute);
+          speed2.innerHTML = `votre score: ` + this.speed;
+        } else if (attribute === "increvable" || attribute === "vehicule_prioritaire" || attribute === "as_volant" || attribute === "citerne") {
+          this.trayBonus.append(innerImage);
+        } else if (attribute === "feux_rouge" || attribute === "panne_essence" || attribute === "crevé" || attribute === "accident" || attribute === "limite_vitesse") {
+          player1.trayAttack.append(innerImage);
+        } else if (attribute === "feux_vert" || attribute == "reparation" || attribute == "fin_vitesse" || attribute == "essence" || attribute == "roue_secours") {
+          this.trayDefense.append(innerImage);
+        }
+        this.handArray.splice(7, 1);
+        countingAdded = 0;
+        play = false;
+        console.log(play);
+      } else {
+        alert("tire une putain de carte");
+      }
+    });
+  },
+  playCard() {
+    for (let i = 0; i < this.handCard.length; i++) {
+      this.handCard[i].addEventListener("click", () => {
+        if (play) {
+          let innerImage = this.handCard[i].querySelector("img");
+          let attribute = innerImage.getAttribute("alt");
+          if (attribute === "50" || attribute === "25" || attribute === "75" || attribute === "100" || attribute === "200") {
+            if (this.traySpeed.children[1]) {
+              this.traySpeed.children[1].remove();
+            }
+            this.traySpeed.append(innerImage);
+            this.speed = this.speed + parseInt(attribute);
+            speed2.innerHTML = `votre score: ` + this.speed;
+          } else if (attribute === "increvable" || attribute === "vehicule_prioritaire" || attribute === "as_volant" || attribute === "citerne") {
+            this.trayBonus.append(innerImage);
+          } else if (attribute === "feux_rouge" || attribute === "panne_essence" || attribute === "crevé" || attribute === "accident" || attribute === "limite_vitesse") {
+            player1.trayAttack.append(innerImage);
+          } else if (attribute === "feux_vert" || attribute == "reparation" || attribute == "fin_vitesse" || attribute == "essence" || attribute == "roue_secours") {
+            this.trayDefense.append(innerImage);
+          }
+          this.handCard[i].remove();
+          this.handArray.splice(i, 1);
+          countingAdded = 0;
+          play = false;
+          console.log(play);
+        } else {
+          alert("tire une putain de carte");
+        }
+      });
     }
   }
 };
@@ -113,70 +175,40 @@ shuffleButton.addEventListener("click", () => {
   player1.shuffleHand();
   player2.shuffleHand();
   shuffleButton.remove();
-  hand2.classList.add("animation__hand2");
-  hand1.classList.add("animation__hand1");
+  player2.hand.classList.add("animation__hand2");
+  player1.hand.classList.add("animation__hand1");
   drawCardButton.removeAttribute("disabled");
   setTimeout(function() {
-    tray1.className = "tray1";
-    tray2.className = "tray2";
+    player1.tray.className = "tray1";
+    player2.tray.className = "tray2";
   }, 1200);
 });
 
 // Adding cards to the tray for player 1
 
-for (let i = 0; i < handCards1.length; i++) {
-  handCards1[i].addEventListener("click", () => {
-    let innerImage = handCards1[i].querySelector("img");
+for (let i = 0; i < player1.handCard.length; i++) {
+  player1.handCard[i].addEventListener("click", () => {
+    let innerImage = player1.handCard[i].querySelector("img");
     let attribute = innerImage.getAttribute("alt");
     if (attribute === "50" || attribute === "25" || attribute === "75" || attribute === "100" || attribute === "200") {
-      if (traySpeed1.children[1]) {
-        traySpeed1.children[1].remove();
+      if (player1.traySpeed.children[1]) {
+        player1.traySpeed.children[1].remove();
       }
-      traySpeed1.append(innerImage);
+      player1.traySpeed.append(innerImage);
       player1.speed = player1.speed + parseInt(attribute);
       speed1.innerHTML = `votre score: ` + player1.speed;
     } else if (attribute === "increvable" || attribute === "vehicule_prioritaire" || attribute === "as_volant" || attribute === "citerne") {
-      trayBonus1.append(innerImage);
+      player1.trayBonus.append(innerImage);
     } else if (attribute === "feux_rouge" || attribute === "panne_essence" || attribute === "crevé" || attribute === "accident" || attribute === "limite_vitesse") {
-      trayAttack2.append(innerImage);
+      player2.trayAttack.append(innerImage);
     } else if (attribute === "feux_vert" || attribute == "reparation" || attribute == "fin_vitesse" || attribute == "essence" || attribute == "roue_secours") {
-      trayDefense1.append(innerImage);
+      player1.trayDefense.append(innerImage);
     }
   });
 }
 
 // Adding cards to the tray for player  2
 
-handCards2 = document.querySelectorAll("#hand2 li");
-for (let i = 0; i < handCards2.length; i++) {
-  handCards2[i].addEventListener("click", () => {
-    if (!countingRemoves) {
-      countingRemoves = true;
-    }
-    if (handLength > 7) {
-      let innerImage = handCards2[i].querySelector("img");
-      let attribute = innerImage.getAttribute("alt");
-      if (attribute === "50" || attribute === "25" || attribute === "75" || attribute === "100" || attribute === "200") {
-        if (traySpeed2.children[1]) {
-          traySpeed2.children[1].remove();
-        }
-        traySpeed2.append(innerImage);
-        player2.speed = player2.speed + parseInt(attribute);
-        speed2.innerHTML = `votre score: ` + player2.speed;
-      } else if (attribute === "increvable" || attribute === "vehicule_prioritaire" || attribute === "as_volant" || attribute === "citerne") {
-        trayBonus2.append(innerImage);
-      } else if (attribute === "feux_rouge" || attribute === "panne_essence" || attribute === "crevé" || attribute === "accident" || attribute === "limite_vitesse") {
-        trayAttack1.append(innerImage);
-      } else if (attribute === "feux_vert" || attribute == "reparation" || attribute == "fin_vitesse" || attribute == "essence" || attribute == "roue_secours") {
-        trayDefense2.append(innerImage);
-      }
-      handLength--;
-      handCards2[i].remove();
-    } else {
-      alert("Pas plus d'une carte par tours ! ");
-    }
-  });
-}
 // Pushing random cards to the player's hand
 let randomCards = (hand, hand_cards) => {
   let randomNumber = Math.floor(Math.random() * cards.length);
@@ -190,39 +222,15 @@ let randomCards = (hand, hand_cards) => {
 
 // To draw a card
 drawCardButton.addEventListener("click", () => {
-  if (countingRemoves) {
-    let randomNumber = Math.floor(Math.random() * cards.length);
-    let randomCard = cards[randomNumber];
-    let newLi = document.createElement("li");
-    let newCard = document.createElement("img");
-    newCard.setAttribute("src", randomCard.image);
-    newCard.setAttribute("alt", randomCard.name);
-    newLi.appendChild(newCard);
-    player2.hand2.push(randomCard);
-    hand2.appendChild(newLi);
-    cards.splice(randomNumber, 1);
-    countingRemoves = false;
-    handLength++;
-    newLi.addEventListener("click", () => {
-      let image = newLi.querySelector("img");
-      let attribute = image.getAttribute("alt");
-      if (attribute === "50" || attribute === "25" || attribute === "75" || attribute === "100" || attribute === "200") {
-        if (traySpeed2.children[1]) {
-          traySpeed2.children[1].remove();
-        }
-        traySpeed2.append(image);
-        player2.speed = player2.speed + parseInt(attribute);
-        speed2.innerHTML = `votre score: ` + player2.speed;
-      } else if (attribute === "increvable" || attribute === "vehicule_prioritaire" || attribute === "as_volant" || attribute === "citerne") {
-        trayBonus2.append(image);
-      } else if (attribute === "feux_rouge" || attribute === "panne_essence" || attribute === "crevé" || attribute === "accident" || attribute === "limite_vitesse") {
-        trayAttack1.append(image);
-      } else if (attribute === "feux_vert" || attribute == "reparation" || attribute == "fin_vitesse" || attribute == "essence" || attribute == "roue_secours") {
-        trayDefense2.append(image);
-      }
-      handLength--;
-    });
+  if (countingAdded === 0) {
+    player2.drawCard();
+    countingAdded = 1;
+    play = true;
   } else {
     alert("joue une carte !");
   }
 });
+
+player2.playCard();
+
+// POSER LA QUESTION A QQ PAR RAPPORT A FAIRE UNE FONCTION POUR TTES LES CONDITIONS DE MORT
