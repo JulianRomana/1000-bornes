@@ -131,9 +131,8 @@ let player2 = {
         this.handArray.splice(7, 1);
         countingAdded = 0;
         play = false;
-        console.log(play);
       } else {
-        alert("tire une putain de carte");
+        alert("tire une de carte");
       }
     });
   },
@@ -161,9 +160,8 @@ let player2 = {
           this.handArray.splice(i, 1);
           countingAdded = 0;
           play = false;
-          console.log(play);
         } else {
-          alert("tire une putain de carte");
+          alert("tire une de carte !");
         }
       });
     }
@@ -233,4 +231,4 @@ drawCardButton.addEventListener("click", () => {
 
 player2.playCard();
 
-// POSER LA QUESTION A QQ PAR RAPPORT A FAIRE UNE FONCTION POUR TTES LES CONDITIONS DE MORT
+conso;
