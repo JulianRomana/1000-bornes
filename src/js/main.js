@@ -228,7 +228,4 @@ drawCardButton.addEventListener("click", () => {
     alert("joue une carte !");
   }
 });
-
 player2.playCard();
-
-conso;
