@@ -204,9 +204,6 @@ for (let i = 0; i < player1.handCard.length; i++) {
     }
   });
 }
-
-// Adding cards to the tray for player  2
-
 // Pushing random cards to the player's hand
 let randomCards = (hand, hand_cards) => {
   let randomNumber = Math.floor(Math.random() * cards.length);
