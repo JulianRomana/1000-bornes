@@ -179,7 +179,7 @@ shuffleButton.addEventListener("click", () => {
   setTimeout(function() {
     player1.tray.className = "tray1";
     player2.tray.className = "tray2";
-  }, 1200);
+  }, 1100);
 });
 
 // Adding cards to the tray for player 1
