@@ -194,7 +194,7 @@ for (let i = 0; i < player1.handCard.length; i++) {
       }
       player1.traySpeed.append(innerImage);
       player1.speed = player1.speed + parseInt(attribute);
-      speed1.innerHTML = `votre score: ` + player1.speed;
+      speed1.innerHTML = "votre score: " + player1.speed;
     } else if (attribute === "increvable" || attribute === "vehicule_prioritaire" || attribute === "as_volant" || attribute === "citerne") {
       player1.trayBonus.append(innerImage);
     } else if (attribute === "feux_rouge" || attribute === "panne_essence" || attribute === "crevé" || attribute === "accident" || attribute === "limite_vitesse") {
